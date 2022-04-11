@@ -1,21 +1,38 @@
-//
-// Created by 24100 on 2022/4/10.
-//
-
-// You may need to build the project (run Qt uic code generator) to get "ui_FrameFunc.h" resolved
-
 #include "FrameFunc.h"
 #include "ui_FrameFunc.h"
-
-
-FrameFunc::FrameFunc(QWidget *parent) :
-		QFrame(parent), ui(new Ui::FrameFunc)
+#include "../expr/expr.h"
+FrameFunc::FrameFunc(QWidget *parent) : QFrame(parent), ui(new Ui::FrameFunc)
 {
 	ui->setupUi(this);
+
+	mThread = new QThread(this);
+	mThread->start();
+	mSampling = new Samping();
+	mSampling->moveToThread(mThread);
+	qRegisterMetaType<expr::Postfix>("expr::Postfix");
+	qRegisterMetaType<QVector<std::pair<double, double>>>("QVector<std::pair<double,double>>&");
+
+	connect(ui->btn_read, &QPushButton::clicked, this, &FrameFunc::onBtnReadClick);
+	connect(mSampling, &Samping::over, ui->wdgPaint, &FrameDraw::addPoints);
+	connect(this, &FrameFunc::doSampling, mSampling, &Samping::smaping);
+
+	ui->edt_funcExpr->setText("x^2-1");
 }
 
 FrameFunc::~FrameFunc()
 {
+	mThread->quit();
+	mThread->wait();
 	delete ui;
 }
 
+void FrameFunc::onBtnReadClick()
+{
+	QString expr = ui->edt_funcExpr->text();
+	expr::Postfix post;
+	if (expr::getPostfix(expr, post))
+	{
+		qDebug() << post;
+		emit doSampling(post);
+	}
+}
