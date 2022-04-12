@@ -8,7 +8,7 @@ class Bisection : public Equation
 public:
     bool next() override;
     void output() override;
-    void input(const expr::Postfix &post) override;
+    bool input(const expr::Postfix &post) override;
 
 private:
     inline bool isDiffSign(double x1, double x2);

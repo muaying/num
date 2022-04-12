@@ -3,11 +3,14 @@
 //
 
 #include "Equation.h"
+#include "FrameEquation/FrameFunc.h"
 
 FrameFunc *Equation::frame = nullptr;
-void Equation::input(const expr::Postfix &post)
+bool Equation::input(const expr::Postfix &post)
 {
 	this->mPost = post;
+	precision = frame->cmb_precision->currentText().toDouble();
+	return true;
 }
 
 void Equation::setFrame(FrameFunc *frame)

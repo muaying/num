@@ -18,8 +18,12 @@ public:
 	explicit FrameFunc(QWidget *parent = nullptr);
 	~FrameFunc() override;
 
-private:
+private slots:
 	void onBtnReadClick();
+	/**
+	 * 运行一次迭代算法
+	 */
+	void onBtnNextClick();
 signals:
 	void doSampling(const expr::Postfix &post, double minX = -10, double maxX = 10, int rate = 10000);
 
@@ -30,6 +34,8 @@ private:
 	//算法
 	Equation *equation;
 	Bisection *bisection;
+	bool readyed;
+	int curitcnt; //迭代次数
 };
 
 #endif // NUM_FRAMEFUNC_H

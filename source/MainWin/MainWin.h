@@ -1,7 +1,3 @@
-//
-// Created by 24100 on 2022/4/10.
-//
-
 #ifndef NUM_MAINWIN_H
 #define NUM_MAINWIN_H
 

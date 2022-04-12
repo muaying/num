@@ -51,11 +51,21 @@ void FrameDraw::paintEvent(QPaintEvent *event)
 		painter.drawPoint(LxtoDx(point.first), LytoDy(point.second));
 
 	//绘制 线
-	painter.setPen(QPen(Qt::yellow, 1.0, Qt::SolidLine, Qt::RoundCap, Qt::MiterJoin));
+	painter.setPen(QPen(Qt::black, 1.0, Qt::SolidLine, Qt::RoundCap, Qt::MiterJoin));
 	for (auto line : xLines)
 	{
 		int x = LytoDy(line);
 		painter.drawLine(x, bottom, x, top);
+	}
+
+	painter.setPen(QPen(Qt::darkGray, 1.0, Qt::DashDotLine));
+	painter.setFont(QFont("微软雅黑", 10));
+	// x方向
+	painter.drawLine(left, bottom, right, bottom);
+	for (int i = left; i < right; i += 50)
+	{
+		painter.drawLine(i, bottom, i, bottom + 3);
+		painter.drawText(i - 8, bottom + 10, QString::asprintf("%.2f", DxtoLx(i)));
 	}
 	QFrame::paintEvent(event);
 }
@@ -102,7 +112,7 @@ void FrameDraw::addPoints(QVector<std::pair<double, double>> &ps)
 
 void FrameDraw::addXLine(double x)
 {
-	this->addXLine(x);
+	this->xLines.push_back(x);
 	this->update();
 }
 

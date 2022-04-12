@@ -23,8 +23,10 @@ public:
     virtual void output() = 0;
     /**
      * @brief 从界面获取数据
+     * @return
+     * false 表示数据有误
      */
-    virtual void input(const expr::Postfix &post);
+    virtual bool input(const expr::Postfix &post);
     static void setFrame(FrameFunc *frame);
 
 protected:

@@ -36,7 +36,7 @@
       <item>
        <widget class="QPushButton" name="btn_menu2">
         <property name="text">
-         <string>非线性线程方程</string>
+         <string>非线性方程求根</string>
         </property>
        </widget>
       </item>
