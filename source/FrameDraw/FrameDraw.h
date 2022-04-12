@@ -2,6 +2,8 @@
 #define NUM_FRAMEDRAW_H
 
 #include <QFrame>
+#include <QMutex>
+
 
 class FrameDraw : public QFrame
 {
@@ -36,6 +38,7 @@ private:
 	int bottom;
 	int left;
 	int right;
+	QMutex mutex;
 };
 
 #endif // NUM_FRAMEDRAW_H

@@ -106,6 +106,7 @@ void FrameDraw::wheelEvent(QWheelEvent *event)
 
 void FrameDraw::addPoints(QVector<std::pair<double, double>> &ps)
 {
+	QMutexLocker  locker(&mutex);
 	this->Points.append(ps);
 	this->update();
 }
@@ -118,6 +119,7 @@ void FrameDraw::addXLine(double x)
 
 void FrameDraw::clear()
 {
+	QMutexLocker  locker(&mutex);
 	Points.clear();
 	xLines.clear();
 }

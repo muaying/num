@@ -55,10 +55,15 @@ namespace expr
 		switch (c)
 		{
 		case '-':
-			if (++i >= expr.length())
-				return false;
-			c = expr[i].toLatin1();
-			return c == 'x' || c == 'y' || c == 'z' || c == 'w';
+		{
+			//当前一个字符为左括号 或者 位于第0个  而且后一个字符为 未知数
+			if((i == 0 || (i > 1 && expr[i - 1] == '(')) && ++i < expr.size())
+			{
+				c=expr[i].toLatin1();
+				return c == 'x' || c == 'y' || c == 'z' || c == 'w';
+			}
+			return false;
+		}
 		case 'x':
 		case 'y':
 		case 'z':
@@ -293,7 +298,7 @@ namespace expr
 					return false;
 			}
 		}
-		return true;
+		return n==1;
 	}
 
 	//使栈做媒介进行转换

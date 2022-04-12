@@ -13,7 +13,7 @@ FrameFunc::FrameFunc(QWidget *parent) : QFrame(parent)
 	edt_a1->setText("-10");
 	edt_a2->setText("10");
 	edt_x0->setText("0");
-	edt_funcExpr->setText("x^2-1");
+	edt_funcExpr->setText("x^5-x-1/5");
 	edt_curitcnt->setText("0");
 	//算法
 	Equation::setFrame(this);
@@ -24,7 +24,7 @@ FrameFunc::FrameFunc(QWidget *parent) : QFrame(parent)
 	//绘图
 	mThread = new QThread(this);
 	mThread->start();
-	mSampling = new Samping(this);
+	mSampling = new Samping();
 	mSampling->moveToThread(mThread);
 	qRegisterMetaType<expr::Postfix>("expr::Postfix");
 	qRegisterMetaType<QVector<std::pair<double, double>>>("QVector<std::pair<double,double>>&");
@@ -41,6 +41,7 @@ FrameFunc::~FrameFunc()
 	delete bisection;
 	mThread->quit();
 	mThread->wait();
+	mThread->deleteLater();
 }
 
 void FrameFunc::onBtnReadClick()
@@ -49,21 +50,21 @@ void FrameFunc::onBtnReadClick()
 	expr::Postfix post;
 	if (expr::getPostfix(expr, post))
 	{
-		qDebug() << post;
+
 		if (equation->input(post))
 		{
-			emit doSampling(post);
+			wdgPaint->clear();
 			readyed = true;
 			edt_curitcnt->setText(QString("%1").arg(curitcnt = 0));
-		}
-		else
-		{
-			QMessageBox::information(this, "错误", "输入有误");
-			readyed = false;
+			emit doSampling(post);
 		}
 	}
 	else
-		QMessageBox::information(this, "错误", "表达式输入错误");
+	{
+		QMessageBox::information(this, "错误", "输入有误");
+		readyed = false;
+	}
+	qDebug() << post;
 }
 
 void FrameFunc::onBtnNextClick()
@@ -77,7 +78,7 @@ void FrameFunc::onBtnNextClick()
 		}
 		else
 		{
-			QMessageBox::information(this, "提示", "达到精确度要求");
+			QMessageBox::information(this, "提示", "迭代结束");
 			readyed = false;
 			curitcnt = 0;
 		}

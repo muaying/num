@@ -3,7 +3,6 @@
 
 #include <QObject>
 #include "expr/expr.h"
-
 /**
  * @brief 曲线采样
  */
@@ -19,6 +18,7 @@ signals:
     void over(QVector<std::pair<double, double>> &ret);
 
 private:
+
 };
 
 #endif // NUM_SAMPLING_H

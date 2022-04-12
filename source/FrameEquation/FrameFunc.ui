@@ -130,7 +130,7 @@
           <item>
            <widget class="QLabel" name="label_3">
             <property name="text">
-             <string>迭代式  φ (x)=</string>
+             <string>辅助函数φ(x)= </string>
             </property>
            </widget>
           </item>
@@ -243,13 +243,6 @@
          <widget class="QPushButton" name="btn_next">
           <property name="text">
            <string>迭代一次</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="btn_reset">
-          <property name="text">
-           <string>重置</string>
           </property>
          </widget>
         </item>

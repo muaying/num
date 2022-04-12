@@ -5,11 +5,11 @@
 #include <QThread>
 #include "Sampling.h"
 #include "ui_FrameFunc.h"
-QT_BEGIN_NAMESPACE
+
 
 class Equation;
-
 class Bisection;
+class Newton;
 
 class FrameFunc : public QFrame, public Ui::FrameFunc
 {
@@ -34,6 +34,7 @@ private:
 	//算法
 	Equation *equation;
 	Bisection *bisection;
+	Newton* newton;
 	bool readyed;
 	int curitcnt; //迭代次数
 };
