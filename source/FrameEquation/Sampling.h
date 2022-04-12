@@ -2,7 +2,7 @@
 #define NUM_SAMPLING_H
 
 #include <QObject>
-#include "../expr/expr.h"
+#include "expr/expr.h"
 
 /**
  * @brief 曲线采样

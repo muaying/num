@@ -1,4 +1,5 @@
 #include "Bisection.h"
+#include "FrameEquation/FrameFunc.h"
 
 bool Bisection::next()
 {
@@ -18,12 +19,15 @@ bool Bisection::next()
     return false;
 }
 
-void Bisection::update()
+void Bisection::output()
 {
 }
 
-void Bisection::input(expr::Postfix &&post)
+void Bisection::input(const expr::Postfix &post)
 {
+    Equation::input(std::move(post));
+    a1 = frame->edt_a1->text().toDouble();
+    a2 = frame->edt_a1->text().toDouble();
 }
 
 inline bool Bisection::isDiffSign(double x1, double x2)
