@@ -19,11 +19,15 @@ public:
 	~FrameFunc() override;
 
 private slots:
-	void onBtnReadClick();
+	void on_btn_ready_clicked();
 	/**
 	 * 运行一次迭代算法
 	 */
-	void onBtnNextClick();
+	void on_btn_next_clicked();
+	void on_btn_equation1_clicked();
+	void on_btn_equation2_clicked();
+	void on_btn_equation3_clicked();
+	void on_btn_equation4_clicked();
 signals:
 	void doSampling(const expr::Postfix &post, double minX = -10, double maxX = 10, int rate = 10000);
 

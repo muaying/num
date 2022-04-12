@@ -10,6 +10,7 @@
 class Newton :public  Equation
 {
 public:
+	using Equation::Equation;
 	bool next() override;
 	void output() override;
 	bool input(const expr::Postfix &post) override;

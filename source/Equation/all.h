@@ -1,1 +1,2 @@
-#include "Equation/Bisection.h"
+#include "Bisection.h"
+#include "Newton.h"

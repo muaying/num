@@ -2,6 +2,21 @@
 #include "Equation/all.h"
 #include <QMessageBox>
 
+const char *TIPS_BISECTION =
+	R"(当前算法： 二分法
+需要输入：
+1. 求解方程 f(x)
+2. 求解区间[a0 a1]
+)";
+
+const char *TIPS_NEWTON =
+	R"(当前算法： 牛顿迭代法
+需要输入：
+1. 求解方程 f(x)
+2. 求导函数 φ(x)
+3. 初值x0
+)";
+
 FrameFunc::FrameFunc(QWidget *parent) : QFrame(parent)
 {
 	// ui 界面初始化
@@ -14,10 +29,13 @@ FrameFunc::FrameFunc(QWidget *parent) : QFrame(parent)
 	edt_a2->setText("10");
 	edt_x0->setText("0");
 	edt_funcExpr->setText("x^5-x-1/5");
+	edt_itExpr->setText("5*x^4-1");
 	edt_curitcnt->setText("0");
+	pedt_tips->setPlainText(TIPS_BISECTION);
 	//算法
 	Equation::setFrame(this);
 	bisection = new Bisection();
+	newton = new Newton();
 	equation = bisection;
 	readyed = false;
 	curitcnt = 0;
@@ -30,8 +48,6 @@ FrameFunc::FrameFunc(QWidget *parent) : QFrame(parent)
 	qRegisterMetaType<QVector<std::pair<double, double>>>("QVector<std::pair<double,double>>&");
 
 	//槽函数
-	connect(btn_read, &QPushButton::clicked, this, &FrameFunc::onBtnReadClick);
-	connect(btn_next, &QPushButton::clicked, this, &FrameFunc::onBtnNextClick);
 	connect(mSampling, &Samping::over, wdgPaint, &FrameDraw::addPoints);
 	connect(this, &FrameFunc::doSampling, mSampling, &Samping::smaping);
 }
@@ -44,7 +60,7 @@ FrameFunc::~FrameFunc()
 	mThread->deleteLater();
 }
 
-void FrameFunc::onBtnReadClick()
+void FrameFunc::on_btn_ready_clicked()
 {
 	QString expr = edt_funcExpr->text();
 	expr::Postfix post;
@@ -67,7 +83,7 @@ void FrameFunc::onBtnReadClick()
 	qDebug() << post;
 }
 
-void FrameFunc::onBtnNextClick()
+void FrameFunc::on_btn_next_clicked()
 {
 	if (readyed)
 	{
@@ -83,4 +99,26 @@ void FrameFunc::onBtnNextClick()
 			curitcnt = 0;
 		}
 	}
+}
+
+void FrameFunc::on_btn_equation1_clicked()
+{
+	equation = bisection;
+	pedt_tips->setPlainText(TIPS_BISECTION);
+	readyed = false;
+}
+
+void FrameFunc::on_btn_equation2_clicked()
+{
+}
+
+void FrameFunc::on_btn_equation3_clicked()
+{
+	equation = newton;
+	pedt_tips->setPlainText(TIPS_NEWTON);
+	readyed = false;
+}
+
+void FrameFunc::on_btn_equation4_clicked()
+{
 }

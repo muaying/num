@@ -11,6 +11,7 @@ class FrameFunc;
 class Equation
 {
 public:
+	Equation()=default;
     /**
      * @brief 迭代一次
      * @return

@@ -54,7 +54,7 @@ void FrameDraw::paintEvent(QPaintEvent *event)
 	painter.setPen(QPen(Qt::black, 1.0, Qt::SolidLine, Qt::RoundCap, Qt::MiterJoin));
 	for (auto line : xLines)
 	{
-		int x = LytoDy(line);
+		int x = LxtoDx(line);
 		painter.drawLine(x, bottom, x, top);
 	}
 

@@ -6,7 +6,14 @@
 #include "FrameEquation/FrameFunc.h"
 bool Newton::next()
 {
-
+	double f,df;
+	if(expr::getResult(mPost,f,x0)&&expr::getResult(derivative,df,x0))
+	{
+		double x=x0-f/df;
+		if(isEqual(x0,x))
+			return true;
+		x0=x;
+	}
 	return false;
 }
 

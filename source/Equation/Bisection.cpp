@@ -4,7 +4,7 @@
 bool Bisection::next()
 {
     double mid = (a1 + a2) / 2;
-    double f3 = 0;
+	double f1, f2, f3;
     if (expr::getResult(mPost, f1, a1) && expr::getResult(mPost, f2, a2) && expr::getResult(mPost, f3, mid))
     {
         if (isDiffSign(f1, f3))
@@ -34,7 +34,3 @@ bool Bisection::input(const expr::Postfix &post)
     return a1 <= a2;
 }
 
-inline bool Bisection::isDiffSign(double x1, double x2)
-{
-    return x1 < 0 && x2 > 0 || x1 > 0 && x2 < 0;
-}
