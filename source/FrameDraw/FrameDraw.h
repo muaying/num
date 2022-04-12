@@ -4,7 +4,6 @@
 #include <QFrame>
 #include <QMutex>
 
-
 class FrameDraw : public QFrame
 {
 	Q_OBJECT
@@ -14,7 +13,9 @@ public:
 	~FrameDraw() override;
 	void paintEvent(QPaintEvent *event) override;
 	void resizeEvent(QResizeEvent *event) override;
-	void wheelEvent(QWheelEvent *event) override;
+	void mousePressEvent(QMouseEvent *event);		  //记录放大时按下的位置
+	void wheelEvent(QWheelEvent *event) override;	  //放大
+	void mouseMoveEvent(QMouseEvent *event) override; //鼠标拖动
 public slots:
 	//添加 清除数据
 	void addPoints(QVector<std::pair<double, double>> &ps);
@@ -34,6 +35,7 @@ private:
 	double LMaxY;
 	double LMinX;
 	double LMinY;
+	double oldx;
 	int top;
 	int bottom;
 	int left;

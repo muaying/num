@@ -79,6 +79,12 @@ void FrameDraw::resizeEvent(QResizeEvent *event)
 	QWidget::resizeEvent(event);
 }
 
+void FrameDraw::mousePressEvent(QMouseEvent *event)
+{
+	oldx = DxtoLx(event->x());
+	QFrame::mousePressEvent(event);
+}
+
 void FrameDraw::wheelEvent(QWheelEvent *event)
 {
 	double min = this->LMinX;
@@ -95,8 +101,6 @@ void FrameDraw::wheelEvent(QWheelEvent *event)
 		{
 			LMinX = min;
 			LMaxX = max;
-			LMinY = min;
-			LMaxY = max;
 			update();
 		}
 	}
@@ -104,9 +108,22 @@ void FrameDraw::wheelEvent(QWheelEvent *event)
 	QFrame::wheelEvent(event);
 }
 
+void FrameDraw::mouseMoveEvent(QMouseEvent *event)
+{
+	double offset = oldx - DxtoLx(event->x());
+	double min = LMinX + offset;
+	double max = LMaxX + offset;
+	if (min > -10 && max <= 10)
+	{
+		LMinX = min;
+		LMaxX = max;
+		update();
+	}
+	QFrame::mouseMoveEvent(event);
+}
 void FrameDraw::addPoints(QVector<std::pair<double, double>> &ps)
 {
-	QMutexLocker  locker(&mutex);
+	QMutexLocker locker(&mutex);
 	this->Points.append(ps);
 	this->update();
 }
@@ -119,9 +136,12 @@ void FrameDraw::addXLine(double x)
 
 void FrameDraw::clear()
 {
-	QMutexLocker  locker(&mutex);
-	Points.clear();
 	xLines.clear();
+	LMaxX = 10;
+	LMinX = -10;
+	QMutexLocker locker(&mutex);
+	Points.clear();
+	update();
 }
 
 int FrameDraw::LxtoDx(double x) const
