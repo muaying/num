@@ -57,9 +57,9 @@ namespace expr
 		case '-':
 		{
 			//当前一个字符为左括号 或者 位于第0个  而且后一个字符为 未知数
-			if((i == 0 || (i > 1 && expr[i - 1] == '(')) && ++i < expr.size())
+			if ((i == 0 || (i > 1 && expr[i - 1] == '(')) && ++i < expr.size())
 			{
-				c=expr[i].toLatin1();
+				c = expr[i].toLatin1();
 				return c == 'x' || c == 'y' || c == 'z' || c == 'w';
 			}
 			return false;
@@ -298,7 +298,7 @@ namespace expr
 					return false;
 			}
 		}
-		return n==1;
+		return n == 1;
 	}
 
 	//使栈做媒介进行转换
@@ -416,7 +416,12 @@ namespace expr
 			for (auto &it : post)
 			{
 				if (it.getType() == exprMeta::Type::XKEY)
-					stack.push_back(keyVal);
+				{
+					if (it.getXkey() < 'a')
+						stack.push_back(-keyVal);
+					else
+						stack.push_back(keyVal);
+				}
 				else if (it.getType() == exprMeta::Type::NUMBER)
 					stack.push_back(it.getNumber());
 				else //符号

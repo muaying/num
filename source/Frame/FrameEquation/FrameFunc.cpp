@@ -50,6 +50,9 @@ FrameFunc::FrameFunc(QWidget *parent) : QFrame(parent)
 	//槽函数
 	connect(mSampling, &Samping::over, wdgPaint, &FrameDraw::addPoints);
 	connect(this, &FrameFunc::doSampling, mSampling, &Samping::smaping);
+
+
+	on_btn_equation1_clicked();
 }
 
 FrameFunc::~FrameFunc()
@@ -66,13 +69,18 @@ void FrameFunc::on_btn_ready_clicked()
 	expr::Postfix post;
 	if (expr::getPostfix(expr, post))
 	{
-
 		if (equation->input(post))
 		{
 			wdgPaint->clear();
+			pEdit_out->clear();
 			readyed = true;
 			edt_curitcnt->setText(QString("%1").arg(curitcnt = 0));
+			qDebug()<<post;
 			emit doSampling(post);
+		}else
+		{
+			QMessageBox::information(this, "错误", "导函数输入有误");
+			readyed = false;
 		}
 	}
 	else
@@ -80,7 +88,7 @@ void FrameFunc::on_btn_ready_clicked()
 		QMessageBox::information(this, "错误", "输入有误");
 		readyed = false;
 	}
-	qDebug() << post;
+
 }
 
 void FrameFunc::on_btn_next_clicked()

@@ -65,7 +65,7 @@ void FrameDraw::paintEvent(QPaintEvent *event)
 	for (int i = left; i < right; i += 50)
 	{
 		painter.drawLine(i, bottom, i, bottom + 3);
-		painter.drawText(i - 8, bottom + 10, QString::asprintf("%.2f", DxtoLx(i)));
+		painter.drawText(i - 8, bottom + 10, QString::number(DxtoLx(i), 'f', 1));
 	}
 	QFrame::paintEvent(event);
 }
@@ -81,44 +81,33 @@ void FrameDraw::resizeEvent(QResizeEvent *event)
 
 void FrameDraw::mousePressEvent(QMouseEvent *event)
 {
-	oldx = DxtoLx(event->x());
+	px = event->x();
+	pmaxX = LMaxX;
+	pminX = LMinX;
 	QFrame::mousePressEvent(event);
 }
 
 void FrameDraw::wheelEvent(QWheelEvent *event)
 {
-	double min = this->LMinX;
-	double max = this->LMaxX;
-	double d = event->angleDelta().y() / 40;
-	//当放大到差值 小于等于 1的时候停止放大
-	if (d < 0 || max - min > 1)
+	double dx = 0.1 * event->angleDelta().y() / 120 * (LMaxX - LMinX); //当前增量
+	double dr = dx * (right - event->position().x()) / (right - left);
+	double MaxX = LMaxX + dr;
+	double MinX = LMinX - dx + dr;
+	if (dx > 0 || MaxX - MinX > 1)
 	{
-
-		max -= d * 0.1;
-		min += d * 0.1;
-
-		if (max < 10 && min > -10)
-		{
-			LMinX = min;
-			LMaxX = max;
-			update();
-		}
+		LMaxX = MaxX;
+		LMinX = MinX;
 	}
-
+	update();
 	QFrame::wheelEvent(event);
 }
 
 void FrameDraw::mouseMoveEvent(QMouseEvent *event)
 {
-	double offset = oldx - DxtoLx(event->x());
-	double min = LMinX + offset;
-	double max = LMaxX + offset;
-	if (min > -10 && max <= 10)
-	{
-		LMinX = min;
-		LMaxX = max;
-		update();
-	}
+	double offsetX = (px - event->x()) * (LMaxX - LMinX) / (right - left);
+	LMaxX = pmaxX + offsetX;
+	LMinX = pminX + offsetX;
+	update();
 	QFrame::mouseMoveEvent(event);
 }
 void FrameDraw::addPoints(QVector<std::pair<double, double>> &ps)
@@ -142,23 +131,4 @@ void FrameDraw::clear()
 	QMutexLocker locker(&mutex);
 	Points.clear();
 	update();
-}
-
-int FrameDraw::LxtoDx(double x) const
-{
-	return static_cast<int>(left + (x - LMinX) * (right - left) / (LMaxX - LMinX));
-}
-
-double FrameDraw::DxtoLx(int x) const
-{
-	return LMinX + (x - left) * (LMaxX - LMinX) / (right - left);
-}
-int FrameDraw::LytoDy(double y) const
-{
-	return static_cast<int>(bottom - (y - LMinY) * (bottom - top) / (LMaxY - LMinY));
-}
-
-double FrameDraw::DytoLy(int y) const
-{
-	return LMinY + (bottom - y) * (LMaxY - LMinY) / (bottom - top);
 }

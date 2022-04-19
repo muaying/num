@@ -38,7 +38,7 @@
         <item>
          <widget class="QPushButton" name="btn_equation2">
           <property name="text">
-           <string>迭代法</string>
+           <string>一般迭代法</string>
           </property>
          </widget>
         </item>
@@ -92,7 +92,7 @@
       <widget class="QGroupBox" name="gb_out">
        <property name="maximumSize">
         <size>
-         <width>200</width>
+         <width>222</width>
          <height>16777215</height>
         </size>
        </property>

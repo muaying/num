@@ -23,10 +23,24 @@ public slots:
 	void clear();
 
 private:
-	int LxtoDx(double x) const; //逻辑坐标转设备坐标
-	int LytoDy(double y) const;
-	double DxtoLx(int x) const; //设备坐标转逻辑坐标
-	double DytoLy(int y) const;
+	inline int LxtoDx(double x) const //逻辑坐标转设备坐标
+	{
+		return static_cast<int>(left + (x - LMinX) * (right - left) / (LMaxX - LMinX));
+	}
+	inline int LytoDy(double y) const
+	{
+
+		return static_cast<int>(bottom - (y - LMinY) * (bottom - top) / (LMaxY - LMinY));
+	}
+	inline double DxtoLx(int x) const //设备坐标转逻辑坐标
+	{
+		return LMinX + (x - left) * (LMaxX - LMinX) / (right - left);
+	}
+
+	inline double DytoLy(int y) const
+	{
+		return LMinY + (bottom - y) * (LMaxY - LMinY) / (bottom - top);
+	}
 	QVector<std::pair<double, double>> Points;
 	QVector<double> xLines;
 
@@ -35,7 +49,9 @@ private:
 	double LMaxY;
 	double LMinX;
 	double LMinY;
-	double oldx;
+	int px;
+	double pminX;
+	double pmaxX;
 	int top;
 	int bottom;
 	int left;
