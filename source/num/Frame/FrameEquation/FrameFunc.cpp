@@ -16,6 +16,14 @@ const char *TIPS_NEWTON =
 2. 求导函数 φ(x)
 3. 初值x0
 )";
+const char *TIPS_GENERALITERATE =
+		R"(当前算法： 简单迭代法
+需要输入：
+1. 求解方程 f(x)
+2. 求导迭代式 φ(x)
+3. 初值x0
+)";
+
 
 FrameFunc::FrameFunc(QWidget *parent) : QFrame(parent)
 {
@@ -27,15 +35,17 @@ FrameFunc::FrameFunc(QWidget *parent) : QFrame(parent)
 	edt_x0->setValidator(validator);
 	edt_a1->setText("-10");
 	edt_a2->setText("10");
-	edt_x0->setText("0");
-	edt_funcExpr->setText("x^5-x-1/5");
-	edt_itExpr->setText("5*x^4-1");
+	edt_x0->setText("1.5");
+	edt_funcExpr->setText("2*x^3-x-1");
+	edt_itExpr1->setText("((x+1)/2)^(1/3)");
+	edt_itExpr2->setText("6*x^2-1");
 	edt_curitcnt->setText("0");
 	pedt_tips->setPlainText(TIPS_BISECTION);
 	//算法
 	Equation::setFrame(this);
 	bisection = new Bisection();
 	newton = new Newton();
+	iterate=new GeneralIterate();
 	equation = bisection;
 	readyed = false;
 	curitcnt = 0;
@@ -58,6 +68,8 @@ FrameFunc::FrameFunc(QWidget *parent) : QFrame(parent)
 FrameFunc::~FrameFunc()
 {
 	delete bisection;
+	delete newton;
+
 	mThread->quit();
 	mThread->wait();
 	mThread->deleteLater();
@@ -75,7 +87,6 @@ void FrameFunc::on_btn_ready_clicked()
 			pEdit_out->clear();
 			readyed = true;
 			edt_curitcnt->setText(QString("%1").arg(curitcnt = 0));
-			qDebug()<<post;
 			emit doSampling(post);
 		}else
 		{
@@ -118,6 +129,9 @@ void FrameFunc::on_btn_equation1_clicked()
 
 void FrameFunc::on_btn_equation2_clicked()
 {
+	equation=iterate;
+	pedt_tips->setPlainText(TIPS_GENERALITERATE);
+	readyed = false;
 }
 
 void FrameFunc::on_btn_equation3_clicked()
@@ -127,6 +141,6 @@ void FrameFunc::on_btn_equation3_clicked()
 	readyed = false;
 }
 
-void FrameFunc::on_btn_equation4_clicked()
-{
-}
+//void FrameFunc::on_btn_equation4_clicked()
+//{
+//}

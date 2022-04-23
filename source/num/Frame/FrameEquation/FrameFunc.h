@@ -10,6 +10,7 @@
 class Equation;
 class Bisection;
 class Newton;
+class GeneralIterate;
 
 class FrameFunc : public QFrame, public Ui::FrameFunc
 {
@@ -27,7 +28,7 @@ private slots:
 	void on_btn_equation1_clicked();
 	void on_btn_equation2_clicked();
 	void on_btn_equation3_clicked();
-	void on_btn_equation4_clicked();
+	//void on_btn_equation4_clicked();
 signals:
 	void doSampling(const expr::Postfix &post, double minX = -10, double maxX = 10, int rate = 10000);
 
@@ -39,6 +40,7 @@ private:
 	Equation *equation;
 	Bisection *bisection;
 	Newton* newton;
+	GeneralIterate* iterate;
 	bool readyed;
 	int curitcnt; //迭代次数
 };

@@ -26,9 +26,8 @@ void Newton::output()
 bool Newton::input(const expr::Postfix &post)
 {
 	Equation::input(post);
-	if(expr::getPostfix(frame->edt_itExpr->text(),derivative))
+	if(expr::getPostfix(frame->edt_itExpr2->text(),derivative))
 	{
-		qDebug() << derivative;
 		x0=frame->edt_x0->text().toDouble();
 		return true;
 	}

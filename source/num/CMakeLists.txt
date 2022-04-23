@@ -21,4 +21,5 @@ target_link_libraries(${PROJECT_NAME}
         Qt::Core
         Qt::Gui
         Qt::Widgets
+        Eigen3::Eigen
         )

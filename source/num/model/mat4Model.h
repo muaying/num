@@ -5,7 +5,7 @@
 #ifndef NUM_MAT4MODEL_H
 #define NUM_MAT4MODEL_H
 #include <QAbstractTableModel>
-#include "Matrix/Matrix.hpp"
+#include <Eigen/Dense>
 
 class mat4Model :public QAbstractTableModel
 {
@@ -22,7 +22,7 @@ public:
 	//单元格的可操作性标志位，如可编辑，可选中等
 	Qt::ItemFlags flags(const QModelIndex& index) const override;
 private:
-	Mat4 mat4;
+	Eigen::Matrix4d mat4;
 };
 
 

@@ -6,7 +6,7 @@
 #include <QDebug>
 mat4Model::mat4Model(QObject *parent) : QAbstractTableModel(parent)
 {
-	mat4(0,0)=2;
+	mat4=Eigen::Matrix4d::Identity();
 
 }
 
