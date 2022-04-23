@@ -12,10 +12,8 @@ int main()
 	std::cout<< EIGEN_WORLD_VERSION << "." << EIGEN_MAJOR_VERSION << "." << EIGEN_MINOR_VERSION << std::endl;
 
 
-	MatrixXd m = MatrixXd::Random(3, 3);            //初始化动态矩阵m,使用Random函数,初始化的值在[-1,1]区间内,矩阵大小3X3
-	m = (m + MatrixXd::Constant(3, 3, 1.2)) * 50;
-	cout << "m =" << endl << m << endl;
-	VectorXd v(3);
-	v << 1, 2, 3;
-	cout << "m * v =" << endl << m * v << endl;
+	MatrixXd m(3,3);
+	m << 1,2,3,4,5,6,7,8,9;
+	cout<<"row1\n"<<m.row(1)<<std::endl;
+	cout<<"row\n"<<m.rows();
 }

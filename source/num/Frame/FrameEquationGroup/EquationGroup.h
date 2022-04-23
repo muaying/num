@@ -1,31 +1,27 @@
-//
-// Created by 24100 on 2022/4/19.
-//
-
 #ifndef NUM_EQUATIONGROUP_H
 #define NUM_EQUATIONGROUP_H
 
 #include <QFrame>
-#include "mat4Model.h"
+#include "matModel.h"
+#include "ui_EquationGroup.h"
+#include "EquationGroup/EGSolution.h"
+#include "EquationGroup/EGGauss.h"
 
-QT_BEGIN_NAMESPACE
-namespace Ui
-{
-class EquationGroup;
-}
-QT_END_NAMESPACE
-
-class EquationGroup : public QFrame
+class EquationGroup : public QFrame ,public Ui::EquationGroup
 {
 Q_OBJECT
-
 public:
 	explicit EquationGroup(QWidget *parent = nullptr);
 	~EquationGroup() override;
+public slots:
+	void on_sbox_xcnt_valueChanged(int i);
+	void on_btn_ready_clicked();
+	void on_btn_next_clicked();
 
 private:
-	Ui::EquationGroup *ui;
-	mat4Model* model;
+	matModel* model;
+	EGSolution* solution;
+	EGGauss* egGauss;
 };
 
 

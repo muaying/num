@@ -15,7 +15,12 @@ endif ()
 SET(EXECUTABLE_OUTPUT_PATH ${OUT_DIR})
 SET(LIBRARY_OUTPUT_PATH ${OUT_DIR})
 
-
+set(CMAKE_PREFIX_PATH "D:/Software/SDK/Qt/5.15.2/mingw81_64")
+find_package(Qt5 COMPONENTS
+        Core
+        Gui
+        Widgets
+        REQUIRED)
 
 
 add_subdirectory(source)

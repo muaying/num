@@ -27,14 +27,14 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_4">
       <item>
-       <widget class="QPushButton" name="btn1">
+       <widget class="QPushButton" name="btn_method1">
         <property name="text">
-         <string>Gauss消元法</string>
+         <string>列选主元的高斯消元</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="btn1_2">
+       <widget class="QPushButton" name="btn_method2">
         <property name="text">
          <string>三角消元法</string>
         </property>
@@ -71,7 +71,7 @@
          <enum>QAbstractItemView::NoSelection</enum>
         </property>
         <property name="gridStyle">
-         <enum>Qt::DashLine</enum>
+         <enum>Qt::SolidLine</enum>
         </property>
         <property name="cornerButtonEnabled">
          <bool>false</bool>
@@ -88,14 +88,14 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="btn_ready">
         <property name="text">
          <string>准备</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="btn_next">
         <property name="text">
          <string>运算一次</string>
         </property>
@@ -113,6 +113,33 @@
          </size>
         </property>
        </spacer>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>未知数个数</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="sbox_xcnt">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+          <property name="minimum">
+           <number>3</number>
+          </property>
+          <property name="maximum">
+           <number>6</number>
+          </property>
+          <property name="value">
+           <number>4</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </widget>
@@ -134,8 +161,16 @@
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
-        <widget class="QPlainTextEdit" name="info"/>
-        <widget class="QPlainTextEdit" name="output"/>
+        <widget class="QPlainTextEdit" name="info">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QPlainTextEdit" name="output">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
        </widget>
       </item>
      </layout>
