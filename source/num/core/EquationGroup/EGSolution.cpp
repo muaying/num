@@ -3,6 +3,7 @@
 //
 #include "EGSolution.h"
 
+MatrixXd* EGSolution::mat= nullptr;
 void EGSolution::setMat(MatrixXd *m)
 {
 	EGSolution::mat=m;

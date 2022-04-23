@@ -16,6 +16,11 @@ bool EGGauss::next()
 {
 	auto maxIndex=maxIndexVec(mat->col(curX));
 	qDebug()<<maxIndex;
-
+	if(maxIndex!=0)
+	{
+		auto vec=mat->row(maxIndex);
+		mat->row(maxIndex)==mat->row(0);
+		mat->row(0)=vec;
+	}
 	return false;
 }
