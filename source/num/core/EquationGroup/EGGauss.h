@@ -12,10 +12,14 @@
 class EGGauss :public EGSolution
 {
 public:
-	virtual void ready();
-	virtual bool next();
+	EGGauss();
+	virtual void ready()override;
+	virtual bool next()override;
+	void output() override;
+
 private:
 	int curX;//当前xiao元位置
+	int maxIndex;//列选主元
 };
 
 

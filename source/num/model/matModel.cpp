@@ -92,7 +92,6 @@ void matModel::setXCount(int count)
 		endInsertColumns();
 	}
 
-
 }
 
 void matModel::updateMat()

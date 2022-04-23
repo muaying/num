@@ -5,6 +5,7 @@
 #ifndef LEARN_NUM_EGSOLUTION_H
 #define LEARN_NUM_EGSOLUTION_H
 #include <Eigen/Dense>
+#include "FrameEquationGroup/EquationGroup.h"
 
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
@@ -14,10 +15,12 @@ class EGSolution
 public:
 	virtual void ready()=0;
 	virtual bool next()=0;
-	static void setMat(MatrixXd* m);
+	virtual void output()=0;
+	static void setFrameMat(EquationGroup* frame,MatrixXd* m);
 protected:
 	static MatrixXd* mat;
-	static int maxIndexVec(const VectorXd& vectorXd);
+	static EquationGroup* frame;
+	static int maxAbsIndexVec(const VectorXd& vectorXd);
 };
 
 

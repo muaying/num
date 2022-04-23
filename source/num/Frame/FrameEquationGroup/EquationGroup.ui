@@ -115,6 +115,13 @@
        </spacer>
       </item>
       <item>
+       <widget class="QPushButton" name="btn_reset">
+        <property name="text">
+         <string>填入默认值</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
          <widget class="QLabel" name="label_2">
@@ -162,6 +169,12 @@
          <enum>Qt::Horizontal</enum>
         </property>
         <widget class="QPlainTextEdit" name="info">
+         <property name="maximumSize">
+          <size>
+           <width>220</width>
+           <height>16777215</height>
+          </size>
+         </property>
          <property name="readOnly">
           <bool>true</bool>
          </property>

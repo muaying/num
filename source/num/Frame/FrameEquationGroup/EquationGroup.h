@@ -4,8 +4,10 @@
 #include <QFrame>
 #include "matModel.h"
 #include "ui_EquationGroup.h"
-#include "EquationGroup/EGSolution.h"
-#include "EquationGroup/EGGauss.h"
+
+
+class EGSolution;
+class EGGauss;
 
 class EquationGroup : public QFrame ,public Ui::EquationGroup
 {
@@ -17,6 +19,9 @@ public slots:
 	void on_sbox_xcnt_valueChanged(int i);
 	void on_btn_ready_clicked();
 	void on_btn_next_clicked();
+	void on_btn_method1_clicked();
+	void on_btn_method2_clicked();
+	void on_btn_reset_clicked();
 
 private:
 	matModel* model;
