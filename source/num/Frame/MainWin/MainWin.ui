@@ -66,7 +66,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="btn_menu3_2">
+       <widget class="QPushButton" name="btn_menu4">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -142,7 +142,7 @@
       <enum>QFrame::Plain</enum>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="page_main">
       <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -209,6 +209,20 @@ p, li { white-space: pre-wrap; }
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="page_eg2">
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <widget class="FrameEGIter" name="frame_3">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
   </layout>
@@ -224,6 +238,12 @@ p, li { white-space: pre-wrap; }
    <class>EquationGroup</class>
    <extends>QFrame</extends>
    <header>FrameEquationGroup/EquationGroup.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>FrameEGIter</class>
+   <extends>QFrame</extends>
+   <header>FrameEGIter/FrameEGIter.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

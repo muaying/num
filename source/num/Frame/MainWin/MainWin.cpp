@@ -26,3 +26,9 @@ void MainWin::on_btn_menu3_clicked()
 {
 	ui->swdg->setCurrentIndex(2);
 }
+
+void MainWin::on_btn_menu4_clicked()
+{
+	ui->swdg->setCurrentIndex(3);
+}
+

@@ -22,6 +22,7 @@ public slots:
 	void on_btn_menu1_clicked();
 	void on_btn_menu2_clicked();
 	void on_btn_menu3_clicked();
+	void on_btn_menu4_clicked();
 private:
 	Ui::MainWin *ui;
 };

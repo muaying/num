@@ -117,7 +117,7 @@
       <item>
        <widget class="QPushButton" name="btn_reset">
         <property name="text">
-         <string>填入默认值</string>
+         <string>还原数据</string>
         </property>
        </widget>
       </item>
@@ -133,7 +133,7 @@
         <item>
          <widget class="QSpinBox" name="sbox_xcnt">
           <property name="readOnly">
-           <bool>true</bool>
+           <bool>false</bool>
           </property>
           <property name="minimum">
            <number>3</number>

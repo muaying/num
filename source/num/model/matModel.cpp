@@ -6,12 +6,7 @@
 #include <QDebug>
 
 matModel::matModel(QObject *parent) : QAbstractTableModel(parent), mat(4, 5)
-{
-	mat << 1, -1, 1, -4, 2,
-			5, -4, 3, 12, 4,
-			2, 1, 1, 11, 3,
-			2, -1, 7, -1, 0;
-}
+{}
 
 QVariant matModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
@@ -83,7 +78,7 @@ void matModel::setXCount(int count)
 		mat = Eigen::MatrixXd::Zero(count,count+1);
 		endRemoveRows();
 		endRemoveColumns();
-	}else
+	}else//增加
 	{
 		beginInsertColumns(QModelIndex(),mat.cols()+1,count);
 		beginInsertRows(QModelIndex(),mat.rows()+1,count-1);
@@ -91,7 +86,8 @@ void matModel::setXCount(int count)
 		endInsertColumns();
 		endInsertColumns();
 	}
-
+	emit  headerDataChanged(Qt::Horizontal,0,mat.cols()-1);
+	emit  headerDataChanged(Qt::Vertical,0,mat.rows()-1);
 }
 
 void matModel::updateMat()

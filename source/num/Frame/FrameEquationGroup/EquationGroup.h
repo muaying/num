@@ -8,7 +8,7 @@
 
 class EGSolution;
 class EGGauss;
-
+class EGLU;
 class EquationGroup : public QFrame ,public Ui::EquationGroup
 {
 Q_OBJECT
@@ -27,6 +27,8 @@ private:
 	matModel* model;
 	EGSolution* solution;
 	EGGauss* egGauss;
+	EGLU* egLu;
+	Eigen::MatrixXd m_oldMat;
 };
 
 
