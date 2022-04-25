@@ -13,7 +13,9 @@ int main()
 
 
 	MatrixXd m(3,3);
-	m << 1,2,3,4,5,6,7,8,9;
-	cout<<"row1\n"<<m.row(1)<<std::endl;
-	cout<<"row\n"<<m.rows();
+	m << 1,0,0,0,5,0,0,8,0;
+	cout<<"m\n"<<m.inverse()<<endl;
+
+	cout<<"row1\n"<<m.row(1)<<endl;
+	cout<<"row\n"<<m.rows()<<endl;
 }

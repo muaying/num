@@ -46,7 +46,6 @@ FrameFunc::FrameFunc(QWidget *parent) : QFrame(parent)
 	bisection = new Bisection();
 	newton = new Newton();
 	iterate=new GeneralIterate();
-	equation = bisection;
 	readyed = false;
 	curitcnt = 0;
 	//绘图

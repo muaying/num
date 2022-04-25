@@ -3,7 +3,7 @@
 
 #include <QFrame>
 #include <QThread>
-#include "Sampling.h"
+#include "Equation/Sampling.h"
 #include "ui_FrameFunc.h"
 
 

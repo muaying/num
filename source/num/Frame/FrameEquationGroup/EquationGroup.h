@@ -2,7 +2,7 @@
 #define NUM_EQUATIONGROUP_H
 
 #include <QFrame>
-#include "matModel.h"
+#include "MatModel/matModel.h"
 #include "ui_EquationGroup.h"
 
 

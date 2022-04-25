@@ -5,23 +5,29 @@
 #include "EGIterJacobi.h"
 
 /**
- * @brief  求解迭代矩阵
+ * @brief  求解 迭代矩阵
+ *
+ *
+ * B=E- A.diagonal.inverse()*A
  */
 void EGIterJacobi::ready()
 {
+	EGIterSolution::ready();
+	vecF=mat_eg->col(mat_eg->rows());
 	MatrixXd  A= mat_eg->leftCols(mat_eg->rows());
-	MatrixXd  D=A.asDiagonal();
-	MatrixXd E(A.rows(),A.rows());
-	E.setIdentity();
-	*mat_iter = E -D.transpose()*A;
+	MatrixXd E=MatrixXd ::Identity(A.rows(),A.cols());
+	di=MatrixXd ::Zero(A.rows(),A.cols());
+	for(int i=0;i<A.cols();++i)
+		di(i,i)=A(i,i);
+	di=di.inverse();
+	(*mat_iter) = E -di*A;
 }
 
 bool EGIterJacobi::next()
 {
+	vecX=(*mat_iter)*vecX+di*vecF;
+	++times;
 	return false;
 }
 
-void EGIterJacobi::output()
-{
 
-}

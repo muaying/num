@@ -35,11 +35,7 @@ bool EGGauss::next()
 	//选主元
 	maxIndex=maxAbsIndexVec(mat->col(curX));
 	if(maxIndex!=0)
-	{
-		VectorXd vec=mat->row(maxIndex);
-		mat->row(maxIndex)=mat->row(curX);
-		mat->row(curX)=vec;
-	}
+		mat->row(maxIndex).swap(mat->row(curX));
 	//消元
 	double x=(*mat)(curX,curX);
 	for(int i=curX+1;i<mat->rows();++i)

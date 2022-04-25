@@ -11,7 +11,9 @@ class EGIterJacobi :public EGIterSolution
 public:
 	void ready() override;
 	bool next() override;
-	void output() override;
+private:
+	MatrixXd di;//D(-1)
+	VectorXd vecF;
 };
 
 
