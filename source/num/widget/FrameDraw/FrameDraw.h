@@ -16,6 +16,7 @@ public:
 	void mousePressEvent(QMouseEvent *event);		  //记录放大时按下的位置
 	void wheelEvent(QWheelEvent *event) override;	  //放大
 	void mouseMoveEvent(QMouseEvent *event) override; //鼠标拖动
+	void setRangeY(double min ,double max);
 public slots:
 	//添加 清除数据
 	void addPoints(QVector<std::pair<double, double>> &ps);

@@ -36,7 +36,7 @@
       <item>
        <widget class="QPushButton" name="btn_method2">
         <property name="text">
-         <string>三角消元法</string>
+         <string>LU分解法</string>
         </property>
        </widget>
       </item>

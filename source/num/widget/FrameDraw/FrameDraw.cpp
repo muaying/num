@@ -132,3 +132,10 @@ void FrameDraw::clear()
 	Points.clear();
 	update();
 }
+
+void FrameDraw::setRangeY(double min, double max)
+{
+	LMaxY=max;
+	LMinY=min;
+	update();
+}
