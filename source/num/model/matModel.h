@@ -18,13 +18,12 @@ public:
 	bool setData(const QModelIndex &index, const QVariant &value,int role = Qt::EditRole) override;
 	Qt::ItemFlags flags(const QModelIndex& index) const override;
 
-	/**
-	 * @brief 设置矩阵未知数的个数
-	 *
-	 * @param count  实际矩阵大小为 count x (count+1)
-	 */
-	void setXCount(int count);
+
 public slots:
+	/**
+	 * @brief 设置矩阵大小
+ 	*/
+	void setMatSize(int row,int col);
 	/**
 	 * @brief 让视图view更新数据
 	 */

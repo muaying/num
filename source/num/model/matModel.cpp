@@ -6,18 +6,15 @@
 #include <QDebug>
 
 matModel::matModel(QObject *parent) : QAbstractTableModel(parent), mat(4, 5)
-{}
+{
+	mat.setZero();
+}
 
 QVariant matModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
 	if (role != Qt::DisplayRole) return QVariant();
 	if (orientation == Qt::Horizontal)
-	{
-		if (section < mat.cols() - 1)
-			return QString("x%1").arg(section+1);
-		else
-			return "b";
-	}
+		return QString('A'+section);
 	return QString::number(section + 1);
 }
 
@@ -69,28 +66,14 @@ Qt::ItemFlags matModel::flags(const QModelIndex &index) const
 	return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable;
 }
 
-void matModel::setXCount(int count)
-{
-	if(count<mat.rows()) //减少
-	{
-		beginRemoveColumns(QModelIndex(),mat.cols()-1,count);
-		beginRemoveRows(QModelIndex(),mat.rows()-1,count-1);
-		mat = Eigen::MatrixXd::Zero(count,count+1);
-		endRemoveRows();
-		endRemoveColumns();
-	}else//增加
-	{
-		beginInsertColumns(QModelIndex(),mat.cols()+1,count);
-		beginInsertRows(QModelIndex(),mat.rows()+1,count-1);
-		mat = Eigen::MatrixXd::Zero(count,count+1);
-		endInsertColumns();
-		endInsertColumns();
-	}
-	emit  headerDataChanged(Qt::Horizontal,0,mat.cols()-1);
-	emit  headerDataChanged(Qt::Vertical,0,mat.rows()-1);
-}
-
 void matModel::updateMat()
 {
 	emit dataChanged(index(0,0),index(mat.rows()-1,mat.cols()-1),QVector<int>());
+}
+
+void matModel::setMatSize(int row, int col)
+{
+	mat = Eigen::MatrixXd::Zero(row,col);
+	emit  headerDataChanged(Qt::Horizontal,0,mat.cols()-1);
+	emit  headerDataChanged(Qt::Vertical,0,mat.rows()-1);
 }

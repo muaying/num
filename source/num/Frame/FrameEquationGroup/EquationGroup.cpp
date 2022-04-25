@@ -56,7 +56,7 @@ EquationGroup::~EquationGroup()
 
 void EquationGroup::on_sbox_xcnt_valueChanged(int i)
 {
-	model->setXCount(i);
+	model->setMatSize(i,i+1);
 }
 
 void EquationGroup::on_btn_ready_clicked()

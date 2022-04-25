@@ -9,12 +9,20 @@
 
 
 FrameEGIter::FrameEGIter(QWidget *parent) :
-		QFrame(parent), ui(new Ui::FrameEGIter)
+		QFrame(parent)
 {
-	ui->setupUi(this);
+	setupUi(this);
+	model_eg=new matModel(this);
+	model_iter=new matModel(this);
+	tv_inputMat->setModel(model_eg);
+	tv_iterMat->setModel(model_iter);
+	model_iter->setMatSize(3,3);
+	tv_inputMat->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+	tv_inputMat->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+	tv_iterMat->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+	tv_iterMat->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
 FrameEGIter::~FrameEGIter()
 {
-	delete ui;
 }

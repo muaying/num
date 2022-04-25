@@ -6,16 +6,10 @@
 #define LEARN_NUM_FRAMEEGITER_H
 
 #include <QFrame>
+#include "matModel.h"
+#include "ui_FrameEGIter.h"
 
-
-QT_BEGIN_NAMESPACE
-namespace Ui
-{
-class FrameEGIter;
-}
-QT_END_NAMESPACE
-
-class FrameEGIter : public QFrame
+class FrameEGIter : public QFrame,public Ui::FrameEGIter
 {
 Q_OBJECT
 
@@ -24,7 +18,10 @@ public:
 	~FrameEGIter() override;
 
 private:
-	Ui::FrameEGIter *ui;
+	matModel* model_eg;  //增广矩阵 model
+	matModel* model_iter;//迭代矩阵 model
+
+
 };
 
 
